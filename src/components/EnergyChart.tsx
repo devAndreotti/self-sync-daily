@@ -1,13 +1,17 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Battery, TrendingUp } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Battery, TrendingUp, Plus } from 'lucide-react';
 
 interface EnergyChartProps {
   currentEnergy: number;
+  onEnergyUpdate?: (energy: number, notes?: string) => void;
 }
 
-const EnergyChart: React.FC<EnergyChartProps> = ({ currentEnergy }) => {
+const EnergyChart: React.FC<EnergyChartProps> = ({ currentEnergy, onEnergyUpdate }) => {
+  const [newEnergyLevel, setNewEnergyLevel] = useState(currentEnergy);
+
   const getEnergyColor = (energy: number) => {
     if (energy >= 70) return 'from-green-400 to-emerald-500';
     if (energy >= 40) return 'from-yellow-400 to-orange-500';
@@ -18,6 +22,12 @@ const EnergyChart: React.FC<EnergyChartProps> = ({ currentEnergy }) => {
     if (energy >= 70) return 'Energia alta! Ideal para tarefas complexas.';
     if (energy >= 40) return 'Energia moderada. Foque em tarefas médias.';
     return 'Energia baixa. Que tal um descanso?';
+  };
+
+  const handleUpdateEnergy = () => {
+    if (onEnergyUpdate) {
+      onEnergyUpdate(newEnergyLevel);
+    }
   };
 
   return (
@@ -49,6 +59,35 @@ const EnergyChart: React.FC<EnergyChartProps> = ({ currentEnergy }) => {
           <div className="p-3 rounded-lg bg-white/40 backdrop-blur-sm">
             <p className="text-sm text-gray-700">{getEnergyMessage(currentEnergy)}</p>
           </div>
+
+          {/* Update Energy Section */}
+          {onEnergyUpdate && (
+            <div className="p-3 rounded-lg bg-white/40 backdrop-blur-sm">
+              <div className="flex items-center gap-3">
+                <label className="text-sm font-medium text-gray-700 min-w-0">
+                  Atualizar:
+                </label>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={newEnergyLevel}
+                  onChange={(e) => setNewEnergyLevel(parseInt(e.target.value))}
+                  className="flex-1"
+                />
+                <span className="text-sm text-gray-600 min-w-0">
+                  {newEnergyLevel}%
+                </span>
+                <Button
+                  onClick={handleUpdateEnergy}
+                  size="sm"
+                  className="bg-blue-500 hover:bg-blue-600 text-white"
+                >
+                  <Plus className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+          )}
 
           {/* Energy Timeline */}
           <div className="space-y-2">

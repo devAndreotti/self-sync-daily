@@ -1,23 +1,50 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Heart, MessageCircle, Star, Send } from 'lucide-react';
+import { DailyReflection } from '@/hooks/useSupabaseData';
 
-const ReflectionPanel = () => {
-  const [reflection, setReflection] = useState('');
+interface ReflectionPanelProps {
+  reflection: DailyReflection | null;
+  onSave: (reflection: Partial<DailyReflection>) => void;
+}
+
+const ReflectionPanel: React.FC<ReflectionPanelProps> = ({ reflection, onSave }) => {
+  const [gratitude, setGratitude] = useState('');
+  const [achievements, setAchievements] = useState('');
+  const [challenges, setChallenges] = useState('');
+  const [tomorrowGoals, setTomorrowGoals] = useState('');
   const [mood, setMood] = useState<number | null>(null);
 
   const moodEmojis = ['😫', '😕', '😐', '😊', '🚀'];
   const moodLabels = ['Esgotado', 'Difícil', 'Neutro', 'Bem', 'Incrível'];
 
+  // Load existing reflection data
+  useEffect(() => {
+    if (reflection) {
+      setGratitude(reflection.gratitude || '');
+      setAchievements(reflection.achievements || '');
+      setChallenges(reflection.challenges || '');
+      setTomorrowGoals(reflection.tomorrow_goals || '');
+      setMood(reflection.mood_rating);
+    }
+  }, [reflection]);
+
   const handleSubmitReflection = () => {
-    // Here you would save the reflection
-    console.log('Reflection submitted:', { reflection, mood });
-    setReflection('');
-    setMood(null);
+    const reflectionData = {
+      gratitude: gratitude.trim() || null,
+      achievements: achievements.trim() || null,
+      challenges: challenges.trim() || null,
+      tomorrow_goals: tomorrowGoals.trim() || null,
+      mood_rating: mood,
+    };
+
+    onSave(reflectionData);
   };
+
+  const hasContent = gratitude.trim() || achievements.trim() || challenges.trim() || tomorrowGoals.trim() || mood !== null;
 
   return (
     <Card className="bg-white/40 backdrop-blur-sm border-white/50 shadow-lg">
@@ -35,9 +62,9 @@ const ReflectionPanel = () => {
             {moodEmojis.map((emoji, index) => (
               <button
                 key={index}
-                onClick={() => setMood(index)}
+                onClick={() => setMood(index + 1)}
                 className={`p-2 rounded-full transition-all duration-200 ${
-                  mood === index 
+                  mood === index + 1
                     ? 'bg-white/60 backdrop-blur-sm shadow-lg scale-110' 
                     : 'hover:bg-white/30 hover:scale-105'
                 }`}
@@ -47,29 +74,65 @@ const ReflectionPanel = () => {
             ))}
           </div>
           {mood !== null && (
-            <p className="text-center text-sm text-gray-600 mt-2">{moodLabels[mood]}</p>
+            <p className="text-center text-sm text-gray-600 mt-2">{moodLabels[mood - 1]}</p>
           )}
         </div>
 
-        {/* Reflection Input */}
+        {/* Gratitude Input */}
         <div>
-          <p className="text-sm text-gray-600 mb-2">O que está em sua mente?</p>
+          <p className="text-sm text-gray-600 mb-2">Pelo que você é grato hoje?</p>
           <Textarea
-            placeholder="Escreva seus pensamentos, conquistas ou desafios do dia..."
-            value={reflection}
-            onChange={(e) => setReflection(e.target.value)}
+            placeholder="Escreva suas gratidões do dia..."
+            value={gratitude}
+            onChange={(e) => setGratitude(e.target.value)}
             className="bg-white/40 backdrop-blur-sm border-white/50 resize-none"
-            rows={3}
+            rows={2}
+          />
+        </div>
+
+        {/* Achievements Input */}
+        <div>
+          <p className="text-sm text-gray-600 mb-2">Suas conquistas de hoje:</p>
+          <Textarea
+            placeholder="O que você conquistou hoje?"
+            value={achievements}
+            onChange={(e) => setAchievements(e.target.value)}
+            className="bg-white/40 backdrop-blur-sm border-white/50 resize-none"
+            rows={2}
+          />
+        </div>
+
+        {/* Challenges Input */}
+        <div>
+          <p className="text-sm text-gray-600 mb-2">Desafios enfrentados:</p>
+          <Textarea
+            placeholder="Que desafios você enfrentou?"
+            value={challenges}
+            onChange={(e) => setChallenges(e.target.value)}
+            className="bg-white/40 backdrop-blur-sm border-white/50 resize-none"
+            rows={2}
+          />
+        </div>
+
+        {/* Tomorrow Goals Input */}
+        <div>
+          <p className="text-sm text-gray-600 mb-2">Metas para amanhã:</p>
+          <Textarea
+            placeholder="O que você quer conquistar amanhã?"
+            value={tomorrowGoals}
+            onChange={(e) => setTomorrowGoals(e.target.value)}
+            className="bg-white/40 backdrop-blur-sm border-white/50 resize-none"
+            rows={2}
           />
         </div>
 
         <Button 
           onClick={handleSubmitReflection}
           className="w-full bg-gradient-to-r from-pink-400 to-purple-500 hover:from-pink-500 hover:to-purple-600 text-white shadow-lg"
-          disabled={!reflection.trim() && mood === null}
+          disabled={!hasContent}
         >
           <Send className="w-4 h-4 mr-2" />
-          Registrar Reflexão
+          {reflection ? 'Atualizar Reflexão' : 'Registrar Reflexão'}
         </Button>
 
         {/* Recent Insights */}
