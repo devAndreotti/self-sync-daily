@@ -104,11 +104,16 @@ export const useSupabaseData = () => {
   };
 
   // Create or update focus block
-  const upsertFocusBlock = async (block: Partial<FocusBlock>) => {
+  const upsertFocusBlock = async (block: Partial<FocusBlock> & { title: string; duration: number; category: string }) => {
     if (!user) return;
 
     const blockData = {
-      ...block,
+      title: block.title,
+      duration: block.duration,
+      category: block.category,
+      completed: block.completed || false,
+      scheduled_time: block.scheduled_time,
+      completed_at: block.completed_at,
       user_id: user.id,
       updated_at: new Date().toISOString(),
     };
@@ -126,7 +131,7 @@ export const useSupabaseData = () => {
     } else {
       const { error } = await supabase
         .from('focus_blocks')
-        .insert([blockData]);
+        .insert(blockData);
 
       if (error) {
         console.error('Error creating focus block:', error);
