@@ -35,11 +35,11 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
-        <div className="backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl p-8 shadow-2xl">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center">
+        <div className="backdrop-blur-xl bg-white/30 dark:bg-black/30 border border-white/20 dark:border-gray-700 rounded-2xl p-8 shadow-2xl">
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-            <p className="mt-4 text-gray-600">Carregando seu dashboard...</p>
+            <p className="mt-4 text-gray-600 dark:text-gray-300">Carregando seu dashboard...</p>
           </div>
         </div>
       </div>
@@ -47,16 +47,16 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Header with User Menu */}
-      <header className="backdrop-blur-xl bg-white/30 border-b border-white/20 sticky top-0 z-50">
+      <header className="backdrop-blur-xl bg-white/30 dark:bg-black/30 border-b border-white/20 dark:border-gray-700 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <div>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Focus Dashboard
               </h1>
-              <p className="text-gray-600 text-sm">Organização Pessoal & Foco</p>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">Organização Pessoal & Foco</p>
             </div>
             <UserMenu />
           </div>
@@ -66,31 +66,31 @@ const Dashboard = () => {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs value={currentTab} onValueChange={setCurrentTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 bg-white/40 backdrop-blur-sm border border-white/30 shadow-lg">
+          <TabsList className="grid w-full grid-cols-4 bg-white/40 dark:bg-black/40 backdrop-blur-sm border border-white/30 dark:border-gray-700 shadow-lg">
             <TabsTrigger 
               value="focus" 
-              className="flex items-center gap-2 data-[state=active]:bg-white/60 data-[state=active]:text-purple-600"
+              className="flex items-center gap-2 data-[state=active]:bg-white/60 dark:data-[state=active]:bg-black/60 data-[state=active]:text-purple-600"
             >
               <Target className="w-4 h-4" />
               Foco
             </TabsTrigger>
             <TabsTrigger 
               value="energy" 
-              className="flex items-center gap-2 data-[state=active]:bg-white/60 data-[state=active]:text-purple-600"
+              className="flex items-center gap-2 data-[state=active]:bg-white/60 dark:data-[state=active]:bg-black/60 data-[state=active]:text-purple-600"
             >
               <Zap className="w-4 h-4" />
               Energia
             </TabsTrigger>
             <TabsTrigger 
               value="stats" 
-              className="flex items-center gap-2 data-[state=active]:bg-white/60 data-[state=active]:text-purple-600"
+              className="flex items-center gap-2 data-[state=active]:bg-white/60 dark:data-[state=active]:bg-black/60 data-[state=active]:text-purple-600"
             >
               <BarChart3 className="w-4 h-4" />
               Estatísticas
             </TabsTrigger>
             <TabsTrigger 
               value="reflection" 
-              className="flex items-center gap-2 data-[state=active]:bg-white/60 data-[state=active]:text-purple-600"
+              className="flex items-center gap-2 data-[state=active]:bg-white/60 dark:data-[state=active]:bg-black/60 data-[state=active]:text-purple-600"
             >
               <Heart className="w-4 h-4" />
               Reflexão
@@ -106,12 +106,12 @@ const Dashboard = () => {
 
               {/* Focus Sessions */}
               <div className="lg:col-span-2 space-y-4">
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">Sessões de Foco</h2>
+                <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Sessões de Foco</h2>
                 {focusBlocks.length === 0 ? (
-                  <div className="backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl p-8 shadow-xl text-center">
+                  <div className="backdrop-blur-xl bg-white/30 dark:bg-black/30 border border-white/20 dark:border-gray-700 rounded-2xl p-8 shadow-xl text-center">
                     <Target className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500 text-lg">Nenhuma sessão de foco criada ainda.</p>
-                    <p className="text-gray-400 text-sm mt-2">Crie sua primeira sessão para começar!</p>
+                    <p className="text-gray-500 dark:text-gray-400 text-lg">Nenhuma sessão de foco criada ainda.</p>
+                    <p className="text-gray-400 dark:text-gray-500 text-sm mt-2">Crie sua primeira sessão para começar!</p>
                   </div>
                 ) : (
                   <div className="space-y-4">
@@ -136,8 +136,8 @@ const Dashboard = () => {
           </TabsContent>
 
           <TabsContent value="energy" className="space-y-6">
-            <div className="backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl p-6 shadow-xl">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+            <div className="backdrop-blur-xl bg-white/30 dark:bg-black/30 border border-white/20 dark:border-gray-700 rounded-2xl p-6 shadow-xl">
+              <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
                 <Zap className="w-5 h-5 text-yellow-500" />
                 Níveis de Energia
               </h2>
@@ -153,8 +153,8 @@ const Dashboard = () => {
           </TabsContent>
 
           <TabsContent value="reflection" className="space-y-6">
-            <div className="backdrop-blur-xl bg-white/30 border border-white/20 rounded-2xl p-6 shadow-xl">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+            <div className="backdrop-blur-xl bg-white/30 dark:bg-black/30 border border-white/20 dark:border-gray-700 rounded-2xl p-6 shadow-xl">
+              <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
                 <Heart className="w-5 h-5 text-pink-500" />
                 Reflexão Diária
               </h2>
