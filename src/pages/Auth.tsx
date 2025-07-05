@@ -88,27 +88,27 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black dark:from-gray-950 dark:via-gray-900 dark:to-black flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-black flex items-center justify-center p-4">
       {/* Theme toggle in top right corner */}
       <div className="absolute top-4 right-4">
         <ThemeToggle />
       </div>
 
       <div className="w-full max-w-md">
-        {/* Glassmorphism card with dark theme */}
-        <div className="backdrop-blur-xl bg-black/20 dark:bg-black/40 border border-white/10 dark:border-white/20 rounded-2xl p-8 shadow-2xl">
+        {/* Glassmorphism card with proper theming */}
+        <div className="backdrop-blur-xl bg-white/80 border border-gray-200/50 dark:bg-black/60 dark:border-white/20 rounded-2xl p-8 shadow-2xl">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
               {isLogin ? 'Welcome Back' : 'Create Account'}
             </h1>
-            <p className="text-gray-300 dark:text-gray-400 mt-2">
+            <p className="text-gray-600 dark:text-gray-300 mt-2">
               {isLogin ? 'Sign in to your account' : 'Sign up to get started'}
             </p>
           </div>
 
           <form onSubmit={handleAuth} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-gray-200 dark:text-gray-300 font-medium">
+              <Label htmlFor="email" className="text-gray-700 dark:text-gray-200 font-medium">
                 Email
               </Label>
               <Input
@@ -118,12 +118,12 @@ const Auth = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="Enter your email"
-                className="backdrop-blur-sm bg-white/10 dark:bg-white/5 border-white/20 dark:border-white/30 text-white dark:text-gray-100 placeholder:text-gray-400 focus:border-blue-400 focus:ring-blue-400/20"
+                className="bg-white/70 border-gray-300 text-gray-900 placeholder:text-gray-500 dark:bg-gray-800/80 dark:border-gray-600 dark:text-white dark:placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500/20"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-gray-200 dark:text-gray-300 font-medium">
+              <Label htmlFor="password" className="text-gray-700 dark:text-gray-200 font-medium">
                 Password
               </Label>
               <Input
@@ -133,13 +133,13 @@ const Auth = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder="Enter your password"
-                className="backdrop-blur-sm bg-white/10 dark:bg-white/5 border-white/20 dark:border-white/30 text-white dark:text-gray-100 placeholder:text-gray-400 focus:border-blue-400 focus:ring-blue-400/20"
+                className="bg-white/70 border-gray-300 text-gray-900 placeholder:text-gray-500 dark:bg-gray-800/80 dark:border-gray-600 dark:text-white dark:placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500/20"
               />
             </div>
 
             {error && (
-              <Alert className="backdrop-blur-sm bg-red-500/20 dark:bg-red-500/30 border-red-400/50 dark:border-red-400/60">
-                <AlertDescription className="text-red-200 dark:text-red-100">
+              <Alert className="bg-red-50/80 border-red-200 dark:bg-red-900/50 dark:border-red-700">
+                <AlertDescription className="text-red-800 dark:text-red-200">
                   {error}
                 </AlertDescription>
               </Alert>
@@ -160,7 +160,7 @@ const Auth = () => {
                 setIsLogin(!isLogin);
                 setError('');
               }}
-              className="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200"
+              className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium transition-colors duration-200"
             >
               {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
             </button>
