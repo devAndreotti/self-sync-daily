@@ -1,73 +1,143 @@
-# Welcome to your Lovable project
+# 🎯 Focus Dashboard - Organização Pessoal & Foco
+<p align="center">
+  <!-- Licença -->
+  <img alt="GitHub License" src="https://img.shields.io/github/license/devAndreotti/devAndreotti?color=FFF&labelColor=8e38eb&style=flat-square">
+</p>
 
-## Project info
+<div align="center">
+  <img src="./src/project-02.png" alt="Visual do Self Sync">
+</div>
 
-**URL**: https://lovable.dev/projects/f94e507b-e37e-4929-8521-09341a40a464
+## 📋 Sobre o Projeto
+O **Focus Dashboard** é uma aplicação de produtividade pessoal construída com foco em **gestão de tempo, monitoramento de energia e reflexão diária**. A partir de técnicas comprovadas de organização pessoal, a plataforma oferece ferramentas para criar blocos de foco, acompanhar níveis de energia ao longo do dia e desenvolver o hábito da reflexão estruturada.
 
-## How can I edit this code?
+Este projeto une a potência do **Lovable** com **Supabase** para entregar uma **experiência completa de produtividade** com dados seguros e em tempo real.
 
-There are several ways of editing your application.
+## ⚙️ Funcionalidades Principais
+* 🎯 Criação e gestão de blocos de foco personalizados
+* ⚡ Monitoramento de níveis de energia com gráficos interativos
+* 📊 Estatísticas detalhadas de produtividade e progresso
+* 💭 Sistema de reflexão diária estruturada
+* 🌙 Modo escuro/claro com persistência de preferência
+* 🔐 Autenticação segura com Supabase Auth
+* 📱 Design responsivo e glassmorphism
 
-**Use Lovable**
+## 🛠 Tecnologias Utilizadas
+* **Lovable** (IDE AI-driven com deploy instantâneo)
+* **React + TypeScript**
+* **Supabase** (Backend-as-a-Service)
+* **Tailwind CSS**
+* **shadcn/ui**
+* **Vite**
+* **React Query** (Gerenciamento de estado)
+* **React Router** (Navegação)
+* **Recharts** (Visualização de dados)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f94e507b-e37e-4929-8521-09341a40a464) and start prompting.
+## 📂 Estrutura do Projeto
+```
+├── src/
+│   ├── components/             # Componentes reutilizáveis
+│   │   ├── ui/                # Componentes shadcn/ui
+│   │   ├── Dashboard.tsx      # Dashboard principal
+│   │   ├── FocusBlock.tsx     # Bloco de foco individual
+│   │   ├── EnergyChart.tsx    # Gráfico de energia
+│   │   └── ThemeToggle.tsx    # Alternador de tema
+│   ├── pages/                 # Páginas da aplicação
+│   │   ├── Index.tsx          # Página inicial
+│   │   ├── Auth.tsx           # Autenticação
+│   │   └── NotFound.tsx       # 404
+│   ├── contexts/              # Contextos React
+│   │   ├── AuthContext.tsx    # Contexto de autenticação
+│   │   └── ThemeContext.tsx   # Contexto de tema
+│   ├── hooks/                 # Hooks customizados
+│   │   └── useSupabaseData.ts # Hook para dados do Supabase
+│   ├── integrations/          # Integrações externas
+│   │   └── supabase/          # Configuração Supabase
+│   └── lib/                   # Utilitários
+├── supabase/                  # Schema e migrações
+└── README.md                  # Documentação do projeto
+```
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🧭 Guia de Implementação
+### 🔹 Usando o Lovable (recomendado)
+1. Acesse o projeto em [Lovable](https://lovable.dev/projects/f94e507b-e37e-4929-8521-09341a40a464)
+2. Use prompts para personalizar suas funcionalidades
+3. Publique via **Share > Publish**
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### 🔹 Localmente com VSCode
+```bash
+git clone 
+cd focus-dashboard
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## 🗄️ Estrutura do Banco de Dados
+O projeto utiliza **Supabase** com as seguintes tabelas:
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+* `profiles` - Perfis dos usuários
+* `focus_blocks` - Blocos de foco criados pelos usuários
+* `energy_levels` - Registros de níveis de energia
+* `daily_reflections` - Reflexões diárias estruturadas
 
-**Use GitHub Codespaces**
+Todas as tabelas possuem **Row Level Security (RLS)** habilitado para garantir que usuários acessem apenas seus próprios dados.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🎯 Como Usar
+### 📝 Criando Blocos de Foco
+1. Acesse a aba **Foco**
+2. Preencha o título, duração e categoria
+3. Opcionalmente, defina um horário específico
+4. Clique em **Adicionar Bloco de Foco**
+5. Marque como concluído quando finalizar
 
-## What technologies are used for this project?
+### ⚡ Monitorando Energia
+1. Vá para a aba **Energia**
+2. Registre seu nível atual (1-10)
+3. Acompanhe o gráfico de evolução ao longo do dia
+4. Use os dados para otimizar seu cronograma
 
-This project is built with:
+### 📊 Visualizando Estatísticas
+* Taxa de conclusão de tarefas
+* Distribuição por categorias
+* Tendências de energia
+* Métricas de produtividade
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### 💭 Reflexão Diária
+1. Acesse a aba **Reflexão**
+2. Preencha os campos estruturados:
+   - Conquistas do dia
+   - Desafios enfrentados
+   - Gratidão
+   - Metas para amanhã
+   - Avaliação do humor (1-10)
 
-## How can I deploy this project?
+## 🔐 Autenticação
+O sistema utiliza **Supabase Auth** com:
+* ✅ Cadastro via email/senha
+* ✅ Login seguro
+* ✅ Recuperação de senha
+* ✅ Proteção de rotas
+* ✅ Logout automático
 
-Simply open [Lovable](https://lovable.dev/projects/f94e507b-e37e-4929-8521-09341a40a464) and click on Share -> Publish.
+## 🌙 Temas
+* **Modo Claro**: Interface limpa com tons suaves
+* **Modo Escuro**: Reduz fadiga visual em ambientes com pouca luz
+* **Persistência**: Sua preferência é salva automaticamente
 
-## Can I connect a custom domain to my Lovable project?
+## 💪 Como Contribuir
+1. Faça um fork deste repositório
+2. Crie uma branch: `git checkout -b feature/nova-funcionalidade`
+3. Commit: `git commit -m 'feat: adiciona timer pomodoro'`
+4. Push: `git push origin feature/nova-funcionalidade`
+5. Abra um Pull Request
 
-Yes, you can!
+## 📝 Nota
+Este projeto nasceu como uma ferramenta para **prototipagem acelerada**, focado em criadores, devs solo e entusiastas de narrativas interativas. Combinando IA, automação e design centrado na criatividade, o **IdeaForge Nexus** é seu ponto de partida para transformar ideias em realidades jogáveis.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+<br>
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+---
+
+<p align="center">
+  Desenvolvido com ☕ por <a href="https://github.com/seuUsuario">Ricardo Andreotti Gonçalves</a> 🧑‍💻
+</p>
