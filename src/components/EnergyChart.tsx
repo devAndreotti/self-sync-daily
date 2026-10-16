@@ -63,8 +63,8 @@ const EnergyChart: React.FC<EnergyChartProps> = ({ currentEnergy, onEnergyUpdate
           {/* Update Energy Section */}
           {onEnergyUpdate && (
             <div className="p-3 rounded-lg bg-white/40 backdrop-blur-sm">
-              <div className="flex items-center gap-3">
-                <label className="text-sm font-medium text-gray-700 min-w-0">
+              <div className="flex flex-wrap items-center gap-3">
+                <label className="text-sm font-medium text-gray-700 shrink-0">
                   Atualizar:
                 </label>
                 <input
@@ -73,9 +73,9 @@ const EnergyChart: React.FC<EnergyChartProps> = ({ currentEnergy, onEnergyUpdate
                   max="100"
                   value={newEnergyLevel}
                   onChange={(e) => setNewEnergyLevel(parseInt(e.target.value))}
-                  className="flex-1"
+                  className="flex-1 min-w-[120px]"
                 />
-                <span className="text-sm text-gray-600 min-w-0">
+                <span className="text-sm text-gray-600 shrink-0 w-10 text-right">
                   {newEnergyLevel}%
                 </span>
                 <Button
