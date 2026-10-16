@@ -51,12 +51,12 @@ const Dashboard = () => {
       {/* Header with User Menu */}
       <header className="backdrop-blur-xl bg-white/30 dark:bg-black/30 border-b border-white/20 dark:border-gray-700 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <div className="flex justify-between items-center gap-3">
+            <div className="min-w-0">
+              <h1 className="text-xl sm:text-2xl font-bold whitespace-nowrap bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Focus Dashboard
               </h1>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">Organização Pessoal & Foco</p>
+              <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm whitespace-nowrap">Organização Pessoal & Foco</p>
             </div>
             <UserMenu />
           </div>
@@ -69,30 +69,30 @@ const Dashboard = () => {
           <TabsList className="grid w-full grid-cols-4 bg-white/40 dark:bg-black/40 backdrop-blur-sm border border-white/30 dark:border-gray-700 shadow-lg">
             <TabsTrigger 
               value="focus" 
-              className="flex items-center gap-2 data-[state=active]:bg-white/60 dark:data-[state=active]:bg-black/60 data-[state=active]:text-purple-600"
+              className="flex items-center gap-2 px-1 sm:px-3 text-xs sm:text-sm data-[state=active]:bg-white/60 dark:data-[state=active]:bg-black/60 data-[state=active]:text-purple-600"
             >
-              <Target className="w-4 h-4" />
+              <Target className="hidden sm:block w-4 h-4 shrink-0" />
               Foco
             </TabsTrigger>
-            <TabsTrigger 
-              value="energy" 
-              className="flex items-center gap-2 data-[state=active]:bg-white/60 dark:data-[state=active]:bg-black/60 data-[state=active]:text-purple-600"
+            <TabsTrigger
+              value="energy"
+              className="flex items-center gap-2 px-1 sm:px-3 text-xs sm:text-sm data-[state=active]:bg-white/60 dark:data-[state=active]:bg-black/60 data-[state=active]:text-purple-600"
             >
-              <Zap className="w-4 h-4" />
+              <Zap className="hidden sm:block w-4 h-4 shrink-0" />
               Energia
             </TabsTrigger>
-            <TabsTrigger 
-              value="stats" 
-              className="flex items-center gap-2 data-[state=active]:bg-white/60 dark:data-[state=active]:bg-black/60 data-[state=active]:text-purple-600"
+            <TabsTrigger
+              value="stats"
+              className="flex items-center gap-2 px-1 sm:px-3 text-xs sm:text-sm data-[state=active]:bg-white/60 dark:data-[state=active]:bg-black/60 data-[state=active]:text-purple-600"
             >
-              <BarChart3 className="w-4 h-4" />
+              <BarChart3 className="hidden sm:block w-4 h-4 shrink-0" />
               Estatísticas
             </TabsTrigger>
-            <TabsTrigger 
-              value="reflection" 
-              className="flex items-center gap-2 data-[state=active]:bg-white/60 dark:data-[state=active]:bg-black/60 data-[state=active]:text-purple-600"
+            <TabsTrigger
+              value="reflection"
+              className="flex items-center gap-2 px-1 sm:px-3 text-xs sm:text-sm data-[state=active]:bg-white/60 dark:data-[state=active]:bg-black/60 data-[state=active]:text-purple-600"
             >
-              <Heart className="w-4 h-4" />
+              <Heart className="hidden sm:block w-4 h-4 shrink-0" />
               Reflexão
             </TabsTrigger>
           </TabsList>
@@ -124,7 +124,7 @@ const Dashboard = () => {
                           duration: block.duration,
                           category: block.category,
                           completed: block.completed,
-                          time: block.scheduled_time || '00:00'
+                          time: block.scheduled_time ? block.scheduled_time.slice(0, 5) : ''
                         }}
                         onToggle={() => toggleFocusBlock(block.id)}
                       />

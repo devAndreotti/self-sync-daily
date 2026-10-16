@@ -17,8 +17,8 @@ const UserMenu = () => {
   };
 
   return (
-    <div className="flex items-center gap-4">
-      <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+    <div className="flex items-center gap-2 sm:gap-4 shrink-0">
+      <div className="hidden sm:flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
         <User className="h-4 w-4" />
         <span>{user?.email}</span>
       </div>
@@ -27,10 +27,11 @@ const UserMenu = () => {
         onClick={handleSignOut}
         variant="outline"
         size="sm"
+        aria-label="Sair"
         className="backdrop-blur-sm bg-white/50 dark:bg-black/50 border-white/30 dark:border-gray-700 hover:bg-white/70 dark:hover:bg-black/70 transition-all duration-200"
       >
-        <LogOut className="h-4 w-4 mr-2" />
-        Sign Out
+        <LogOut className="h-4 w-4 sm:mr-2" />
+        <span className="hidden sm:inline">Sign Out</span>
       </Button>
     </div>
   );
